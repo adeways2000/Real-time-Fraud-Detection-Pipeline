@@ -1,0 +1,73 @@
+app:
+  name: "Fraud Detection API"
+  version: "1.0.0"
+  debug: false
+  host: "0.0.0.0"
+  port: 5000
+
+model:
+  name: "fraud_detection_xgb"
+  version: "v1.0"
+  path: "models/fraud_model.pkl"
+  threshold: 0.5
+  retrain_interval_hours: 24
+
+data:
+  max_batch_size: 1000
+  data_retention_days: 30
+  quality_check_enabled: true
+
+monitoring:
+  log_level: "INFO"
+  metrics_enabled: true
+  performance_tracking: true
+  alert_threshold_latency_ms: 200
+  alert_threshold_error_rate: 0.05
+
+features:
+  numerical:
+    - "amount"
+    - "user_age"
+    - "account_age_days"
+    - "hour"
+    - "day_of_week"
+  categorical:
+    - "merchant_category"
+  
+feature_engineering:
+  amount_bins: [0, 10, 50, 100, 500, 1000, 5000]
+  time_features: ["hour", "day_of_week", "is_weekend"]
+  
+security:
+  rate_limit_per_minute: 1000
+  api_key_required: false
+
+
+# MODEL TRAINING CONFIGURATION (add this section)
+model_training:
+  model_type: "xgboost"
+  params:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+  scoring: "roc_auc"
+
+# TRAINING FEATURES (add this section)
+training_features:
+  numerical: ["amount", "customer_age", "merchant_risk_score", "transaction_hour", "days_since_last_transaction"]
+  categorical: ["transaction_type", "merchant_category", "country"]
+  target: "is_fraud"
+
+# PATHS FOR TRAINING (add this section)
+training_paths:
+  train_data: "data/train_data.csv"
+  test_data: "data/test_data.csv"
+  feature_engineer: "models/feature_engineer.pkl"
+  model: "models/fraud_detection_model.pkl"
+  metrics: "models/training_metrics.json"
