@@ -2,6 +2,10 @@
 
 ## 🚀 **Complete Full-Stack Solution**
 
+
+<img width="716" height="540" alt="image" src="https://github.com/user-attachments/assets/82a80844-51c4-4ada-9c56-ffa4963180a1" />
+
+
 A comprehensive fraud detection system featuring both a production-ready REST API backend and an interactive React dashboard frontend. This project demonstrates advanced skills in machine learning, backend API development, frontend dashboard creation, and full-stack integration.
 
 ## ✨ **New Frontend Dashboard Features**
@@ -95,7 +99,7 @@ A comprehensive fraud detection system featuring both a production-ready REST AP
 
 1. **Navigate to project directory:**
    ```bash
-   cd project1_realtime_fraud_detection
+   cd realtime-fraud-detection-pipeline
    ```
 
 2. **Create and activate virtual environment:**
